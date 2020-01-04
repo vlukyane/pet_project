@@ -6,22 +6,22 @@ class SequelizeRepo {
         this.getAllTodos = () => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 return yield this.db.Todo.findAll({
-                    limit: 50
+                    limit: 50,
                 });
             }
             catch (err) {
                 return err;
             }
         });
-        this.getBatchOfTodos = (continuationToken) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+        this.getNextTodos = (lastId) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 return yield this.db.Todo.findAndCountAll({
                     where: {
                         id: {
-                            ['$gt']: continuationToken
+                            ['$gt']: lastId,
                         },
                     },
-                    limit: 50
+                    limit: 50,
                 });
             }
             catch (err) {
@@ -31,7 +31,7 @@ class SequelizeRepo {
         this.getTodoById = (id) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 return yield this.db.Todo.findOne({
-                    where: { id }
+                    where: { id },
                 });
             }
             catch (err) {
@@ -50,7 +50,7 @@ class SequelizeRepo {
             try {
                 return yield this.db.Todo.update({
                     content: todo.content,
-                    isCompleted: todo.isCompleted
+                    isCompleted: todo.isCompleted,
                 }, {
                     where: { id },
                 });
@@ -62,7 +62,7 @@ class SequelizeRepo {
         this.deleteTodoById = (id) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 yield this.db.Todo.destroy({
-                    where: { id }
+                    where: { id },
                 });
                 return { message: 'Item deleted' };
             }

@@ -12,10 +12,10 @@ class MongoRepo {
                 return err;
             }
         });
-        this.getBatchOfTodos = (continuationToken) => tslib_1.__awaiter(this, void 0, void 0, function* () {
+        this.getNextTodos = (lastId) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Todo_1.default.find({
-                    '_id': { $gt: continuationToken }
+                    _id: { $gt: lastId },
                 }).limit(50);
             }
             catch (err) {
@@ -25,7 +25,7 @@ class MongoRepo {
         this.getTodoById = (id) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Todo_1.default.findOne({
-                    "_id": id
+                    _id: id,
                 });
             }
             catch (err) {
@@ -34,7 +34,7 @@ class MongoRepo {
         });
         this.addNewTodo = (todo) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
-                let newTodo = new Todo_1.default(todo);
+                const newTodo = new Todo_1.default(todo);
                 return yield newTodo.save();
             }
             catch (err) {
@@ -44,7 +44,7 @@ class MongoRepo {
         this.deleteTodoById = (id) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Todo_1.default.deleteOne({
-                    "_id": id
+                    _id: id,
                 });
             }
             catch (err) {
@@ -55,10 +55,10 @@ class MongoRepo {
             try {
                 const updatedTodo = new Todo_1.default(editedTodo);
                 return yield Todo_1.default.updateOne({
-                    "_id": id
+                    _id: id,
                 }, {
-                    "content": updatedTodo.content,
-                    "isCompleted": updatedTodo.isCompleted
+                    content: updatedTodo.content,
+                    isCompleted: updatedTodo.isCompleted
                 });
             }
             catch (err) {

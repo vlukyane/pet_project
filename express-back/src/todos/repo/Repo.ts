@@ -5,7 +5,7 @@ export interface Repo {
 
     getAllTodos() :Promise<ITodo[]>;
 
-    getBatchOfTodos(continuationToken: string): Promise<ITodo[]>;
+    getNextTodos(lastId: string): Promise<ITodo[]>;
 
     getTodoById(id: string) :Promise<ITodo>;
 

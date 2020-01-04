@@ -21,74 +21,73 @@ export class TodoController implements Controller {
 
     private initRoutes() {
         this.router.get('/', this.getAllTodos);
-        this.router.get('/:token', this.getBatchOfTodos);
+        this.router.get('/:token', this.getNextTodos);
         this.router.post('/add', this.addNewTodo);
         this.router.delete('/delete/:id', this.deleteTodoById);
         this.router.put('/update/:id', this.updateTodoById);
-        this.router.get('/info/:id', this.getTodoById)
+        this.router.get('/info/:id', this.getTodoById);
     }
 
     getAllTodos = async (req, res): Promise<ITodo[]> => {
         try {
             const allTodos = await this.todoService.getAllTodos();
             return utils.sendResponse(res, {
-                data: allTodos
+                data: allTodos,
             }, 200);
         } catch (err) {
             return utils.sendResponse(res, {
                 message: 'Error occurred while getting all todos.',
-                err
+                err,
             }, 400);
         }
     };
 
-    getBatchOfTodos = async (req: any, res: any): Promise<ITodo[]> => {
-      try{
-          const continuationToken = req.params.token;
-          const batchOfTodos = await this.todoService.getBatchOfTodos(continuationToken);
+    getNextTodos = async (req: any, res: any): Promise<ITodo[]> => {
+      try {
+          const lastId = req.params.token;
+          const nextTodos = await this.todoService.getNextTodos(lastId);
           return utils.sendResponse(res, {
-              data: batchOfTodos
+              data: nextTodos,
           }, 200);
-      }
-      catch (err) {
+      } catch (err) {
           return utils.sendResponse(res, {
-              message: 'Error occurred while getting all todos.',
-              err
+              message: 'Error occurred while getting next todos.',
+              err,
           }, 400);
       }
-    };
+    }
 
     getTodoById = async (req, res): Promise<ITodo> => {
         try {
           const todo = await this.todoService.getTodoById(req.params.id);
           return utils.sendResponse(res, {
-              data: todo
+              data: todo,
           }, 200);
       } catch (err) {
           return utils.sendResponse(res, {
               message: 'Error occurred while getting todo by id.',
-              err
+              err,
           }, 400);
       }
-    };
+    }
 
     addNewTodo = async (req, res): Promise<ITodo> => {
         try {
             const newTodo = await this.todoService.addNewTodo(req.body);
             SocketService.addTodo(newTodo);
 
-            return utils.sendResponse(res,{
+            return utils.sendResponse(res, {
                 message: 'todo added successfully',
-                newTodo
+                newTodo,
             }, 200);
         } catch (err) {
-            return utils.sendResponse(res,{
-                message: "Some error occured while adding new todo",
-                err
+            return utils.sendResponse(res, {
+                message: 'Some error occured while adding new todo',
+                err,
             }, 400);
         }
 
-    };
+    }
 
     deleteTodoById = async (req: any, res: any): Promise<QueryResult> => {
         try {
@@ -98,15 +97,15 @@ export class TodoController implements Controller {
             SocketService.deleteTodo(id);
 
             return utils.sendResponse(res,{
-                message: "Successfully delete todo"
-            }, 200)
+                message: 'Successfully delete todo',
+            }, 200);
         } catch (err) {
             return utils.sendResponse(res,{
-                message: "Some error occured while deleting todo item",
-                err
+                message: 'Some error occured while deleting todo item',
+                err,
             }, 400);
         }
-    };
+    }
 
     updateTodoById = async (req: any, res: any): Promise<void> => {
         try {
@@ -115,16 +114,16 @@ export class TodoController implements Controller {
             const updatedTodo = await this.todoService.updateTodoById(id, req.body);
             SocketService.updateTodoById(id, updatedTodo);
 
-            return utils.sendResponse(res,{
-                message: "Successfully update todo"
-            }, 200)
+            return utils.sendResponse(res, {
+                message: 'Successfully update todo',
+            }, 200);
         } catch (err) {
             return utils.sendResponse(res,{
-                message: "Some error occured while updating todo item",
-                err
-            }, 400)
+                message: 'Some error occured while updating todo item',
+                err,
+            }, 400);
         }
-    };
+    }
 
     getRoutes = () => this.router;
 

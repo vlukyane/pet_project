@@ -4,7 +4,7 @@ import {QueryResult} from '../repo/types';
 export interface Service {
     getAllTodos(): Promise<ITodo[]>;
 
-    getBatchOfTodos(continuationToken: string): Promise<ITodo[]>;
+    getNextTodos(lastId: string): Promise<ITodo[]>;
 
     getTodoById(id: string): Promise<ITodo>;
 

@@ -8,9 +8,9 @@ import {Mongoose} from 'mongoose';
 export class MongoRepo implements Repo {
     db: Mongoose;
     name: string;
-    constructor (db: DB) {
+    constructor(db: DB) {
         this.name = 'mongo';
-        this.db = db.db
+        this.db = db.db;
     }
 
     getAllTodos = async (): Promise<ITodo[]> => {
@@ -22,13 +22,12 @@ export class MongoRepo implements Repo {
         }
     };
 
-    getBatchOfTodos = async (continuationToken: string): Promise<ITodo[]> => {
+    getNextTodos = async (lastId: string): Promise<ITodo[]> => {
         try {
             return await Todo.find({
-                '_id' : {$gt: continuationToken}
+                _id : {$gt: lastId},
             }).limit(50);
-        }
-        catch (err) {
+        } catch (err) {
             return err;
         }
     };
@@ -36,7 +35,7 @@ export class MongoRepo implements Repo {
     getTodoById = async (id: string): Promise<ITodo> => {
         try {
             return await Todo.findOne({
-                "_id": id
+                _id: id,
             });
         } catch (err) {
             // console.log('ERR IN REPO: ', err);
@@ -46,7 +45,7 @@ export class MongoRepo implements Repo {
 
     addNewTodo = async (todo: ITodo): Promise<ITodo> => {
         try {
-            let newTodo = new Todo(todo);
+            const newTodo = new Todo(todo);
             return await newTodo.save();
         } catch (err) {
             // console.log('Error occurred while adding new todo in repo.', err);
@@ -57,7 +56,7 @@ export class MongoRepo implements Repo {
     deleteTodoById = async (id: string): Promise<QueryResult> => {
         try {
             return await Todo.deleteOne({
-                "_id" : id
+                _id : id,
             });
         } catch (err) {
             // console.log('Error occurred while deleting todo in repo', err);
@@ -70,12 +69,12 @@ export class MongoRepo implements Repo {
             const updatedTodo = new Todo(editedTodo);
             return await Todo.updateOne(
                 {
-                    "_id": id
+                    _id: id,
                 },
                 {
-                    "content": updatedTodo.content,
-                    "isCompleted": updatedTodo.isCompleted
-                }
+                    content: updatedTodo.content,
+                    isCompleted: updatedTodo.isCompleted
+                },
             );
         } catch (err) {
             // console.log('Error occurred while updating todo in repo', err);

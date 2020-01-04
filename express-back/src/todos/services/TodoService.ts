@@ -1,7 +1,6 @@
 import {ITodo, QueryResult} from '../repo/types';
 import {Repo} from '../repo/Repo';
 import {Service} from './Service';
-import {copyFileSync} from 'fs';
 
 export class TodoService implements Service {
     repo: Repo;
@@ -12,15 +11,15 @@ export class TodoService implements Service {
 
     getAllTodos = async (): Promise<ITodo[]> => {
         return await this.repo.getAllTodos();
-    };
+    }
 
-    getBatchOfTodos = async(continuationToken: string): Promise<ITodo[]> => {
-        return await this.repo.getBatchOfTodos(continuationToken);
-    };
+    getNextTodos = async (lastId: string): Promise<ITodo[]> => {
+        return await this.repo.getNextTodos(lastId);
+    }
 
     getTodoById = async (id: string): Promise<ITodo> => {
         return await this.repo.getTodoById(id);
-    };
+    }
 
     addNewTodo = async (reqBody): Promise<ITodo> => {
         const { content } = reqBody;
@@ -30,11 +29,11 @@ export class TodoService implements Service {
             isEditing: false
         };
         return await this.repo.addNewTodo(todo);
-    };
+    }
 
     deleteTodoById = async (id: string): Promise<QueryResult> =>{
         return await this.repo.deleteTodoById(id);
-    };
+    }
 
     updateTodoById = async (id: string, reqBody) =>{
         const todo: ITodo = {
@@ -44,5 +43,5 @@ export class TodoService implements Service {
         };
         await this.repo.updateTodoById(id, todo);
         return todo;
-    };
+    }
 }
