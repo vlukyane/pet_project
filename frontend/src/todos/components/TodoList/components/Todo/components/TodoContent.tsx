@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, ListItemText, TextField} from '@material-ui/core';
+import {Button, ListItemText, makeStyles, TextField} from '@material-ui/core';
 import TodoEdit from './TodoEdit';
 import {Done} from '@material-ui/icons';
 
@@ -11,8 +11,16 @@ interface IProps {
     updateTodo: (content: string) => void
 }
 
+const useStyles = makeStyles({
+    completed: {
+        textDecoration: 'line-through'
+    },
+});
+
 const TodoContent: React.FC<IProps> = ({ content, isCompleted, isEditing, editTodo, updateTodo }) => {
     const [term, setTerm] = useState<string>(content || '');
+
+    const classes = useStyles();
 
     const onInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         if (event.target.value === null) return;
@@ -30,7 +38,7 @@ const TodoContent: React.FC<IProps> = ({ content, isCompleted, isEditing, editTo
     return (!isEditing
         ?
         <>
-            <div className={`todo-content ${isCompleted ? 'completed' : ''}`} onClick={() => handleEdit() }>
+            <div className={`todo-content ${isCompleted ? classes.completed : ''}`} onClick={() => handleEdit() }>
                 {content}
             </div>
 

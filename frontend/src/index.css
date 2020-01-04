@@ -1,7 +1,5 @@
-@import url('todos/components/TodoList/components/TodoListTitle/TodoListTitle.css');
-@import url('todos/components/TodoList/components/Todo/Todo.css');
+/*@import url('todos/components/TodoList/components/Todo/Todo.css');*/
 @import url('todos/components/TodoList/components/AddTodo/AddTodo.css');
-@import url('App.css');
 
 body {
   margin: 0;

@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import {ThemeProvider} from '@material-ui/styles';
 import {theme} from './theme';
 import TodoHeader from './todos/components/TodoHeader/TodoHeader';
+import {makeStyles} from "@material-ui/core";
 
 const TodoInfo = React.lazy(() => import('./todos/lazy-components/TodoInfo/TodoInfo'));
 
@@ -12,11 +13,26 @@ const renderLoader = () => (
     <p> Loading..</p>
 );
 
+const useStyles = makeStyles({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '80%',
+        margin: '15px auto 0 auto',
+        paddingBottom: '15px',
+        maxWidth: '600px'
+    }
+});
+
 const App: React.FC = () => {
+
+    const classes = useStyles();
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>
-                <Paper className="container">
+                <Paper className={classes.container}>
                     <TodoHeader/>
                     <Switch>
                         <Route exact path={'/'} render={() =>

@@ -1,10 +1,11 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import TodoContent from "./components/TodoContent";
 import TodoDelete from "./components/TodoDelete";
 import { ITodo } from "../../../../common/types";
 import {Button, Checkbox, ListItem} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {Info} from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface IProps {
     todo: ITodo,
@@ -15,7 +16,30 @@ interface IProps {
     updateScroll: () => any
 }
 
+const useStyles = makeStyles({
+    completed: {
+        textDecoration: 'line-through'
+    },
+    todoItem: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        minWidth: '240px',
+        'todo-content': {
+            maxWidth: '160px',
+            width: '60%',
+            overflowWrap: 'break-word',
+        }
+    },
+});
+
+
 export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo, updateTodo, updateScroll }) =>{
+
+    const classes = useStyles();
+
+    console.log(classes);
+
     const handleEditTodo = () => {
         editTodo(todo.id)
     };
@@ -33,7 +57,7 @@ export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo
     };
 
     return (
-        <ListItem className = {`todo-item`}>
+        <ListItem className = {classes.todoItem}>
             <Checkbox
                 checked={todo.isCompleted}
                 onChange={handleSwitchIsCompleted}
