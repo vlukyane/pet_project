@@ -1,0 +1,16 @@
+.completed {
+    text-decoration: line-through;
+}
+
+.todo-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 240px;
+}
+
+.todo-item .todo-content {
+    max-width: 160px;
+    width: 60%;
+    overflow-wrap: break-word;
+}
