@@ -4,13 +4,10 @@ import {AddTodo} from "./components/AddTodo/AddTodo";
 import TodoListTitle from "./components/TodoListTitle/TodoListTitle";
 import {ITodo} from "../../common/types";
 import {TodoService} from '../../service/TodoService';
-import {SocketService} from '../../service/SocketService';
 import {List as VirtualizedList} from 'react-virtualized';
 import {useDispatch, useSelector} from 'react-redux';
 import {allActions} from '../../actions';
-import {useTodosEffects} from './components/useTodosEffects';
 
-export const socket = SocketService.init();
 
 export interface UpdateTodoData {
     updatedTodo: ITodo,
@@ -22,7 +19,9 @@ interface IProps {
 
 const TodoList: React.FC<IProps> = () => {
     const scroll = useSelector((state: any) => state.scroll.scrollStatus);
-    const todos = useTodosEffects();
+    const todos: ITodo[] = useSelector((state: any) => {
+        return state.todos.list
+    });
     const dispatcher = useDispatch();
     const needToFirstLoadTodos = todos.length <= 0;
 

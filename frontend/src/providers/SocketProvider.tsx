@@ -1,11 +1,16 @@
-import {useEffect} from 'react';
-import {ITodo} from '../../../common/types';
-import {socket, UpdateTodoData} from '../TodoList';
-import {SocketService} from '../../../service/SocketService';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from "react";
+import {SocketService} from "../todos/service/SocketService";
+import {ITodo} from "../todos/common/types";
+import {useDispatch, useSelector} from "react-redux";
+import {UpdateTodoData} from "../todos/components/TodoList/TodoList";
 
-export const useTodosEffects = () => {
+interface IProps {
+    children: React.ReactNode;
+}
 
+const socket = SocketService.init();
+
+const SocketProvider: React.FC<IProps> = ({children}) => {
     const todos: ITodo[] = useSelector((state: any) => {
         return state.todos.list
     });
@@ -26,5 +31,10 @@ export const useTodosEffects = () => {
         return () => socket.off('updateTodoById');
     }, [todos]);
 
-    return todos;
+
+    return <>
+        {children}
+    </>
 };
+
+export default SocketProvider;
