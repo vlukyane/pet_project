@@ -95,7 +95,7 @@ const TodoList: React.FC<IProps> = () => {
 
     const rowHeight = 50;
     const height = 600;
-    const width = 600;
+    const width = 500;
 
     return (
         <>

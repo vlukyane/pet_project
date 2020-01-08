@@ -25,10 +25,12 @@ const useStyles = makeStyles({
         flexDirection: 'row',
         flexWrap: 'wrap',
         minWidth: '240px',
-        'todo-content': {
+        '& .todo-content': {
             maxWidth: '160px',
             width: '60%',
-            overflowWrap: 'break-word',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
         }
     },
 });
@@ -37,8 +39,6 @@ const useStyles = makeStyles({
 export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo, updateTodo, updateScroll }) =>{
 
     const classes = useStyles();
-
-    console.log(classes);
 
     const handleEditTodo = () => {
         editTodo(todo.id)

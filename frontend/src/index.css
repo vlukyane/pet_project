@@ -1,6 +1,3 @@
-/*@import url('todos/components/TodoList/components/Todo/Todo.css');*/
-@import url('todos/components/TodoList/components/AddTodo/AddTodo.css');
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
