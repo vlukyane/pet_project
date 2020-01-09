@@ -7,31 +7,31 @@ class PostgresDB {
             host: 'localhost',
             dialect: 'postgres',
             define: {
-                timestamps: false
-            }
+                timestamps: false,
+            },
         });
         psql.authenticate()
             .then(() => {
             console.log('Connection to postgres has been established successfully.');
         })
-            .catch(err => {
+            .catch((err) => {
             console.error('Unable to connect to the database:', err);
         });
         const Todo = psql.define('Todo', {
             content: {
-                type: sequelize_1.DataTypes.STRING
+                type: sequelize_1.Sequelize.STRING,
             },
             isCompleted: {
-                type: sequelize_1.DataTypes.BOOLEAN
+                type: sequelize_1.Sequelize.BOOLEAN,
             },
             isEditing: {
-                type: sequelize_1.DataTypes.BOOLEAN
+                type: sequelize_1.Sequelize.BOOLEAN,
             },
         });
         return {
             db: psql,
             type: 'postgres',
-            Todo
+            Todo,
         };
     }
 }

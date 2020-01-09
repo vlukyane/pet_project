@@ -31,7 +31,6 @@ const SocketProvider: React.FC<IProps> = ({children}) => {
         return () => socket.off('updateTodoById');
     }, [todos]);
 
-
     return <>
         {children}
     </>

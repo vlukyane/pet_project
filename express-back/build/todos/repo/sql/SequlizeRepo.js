@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
+const sequelize_1 = require("sequelize");
+const Op = sequelize_1.Sequelize.Op;
 class SequelizeRepo {
     constructor(db) {
         this.getAllTodos = () => tslib_1.__awaiter(this, void 0, void 0, function* () {
@@ -15,10 +17,10 @@ class SequelizeRepo {
         });
         this.getNextTodos = (lastId) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
-                return yield this.db.Todo.findAndCountAll({
+                return yield this.db.Todo.findAll({
                     where: {
                         id: {
-                            ['$gt']: lastId,
+                            $gt: lastId,
                         },
                     },
                     limit: 50,

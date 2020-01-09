@@ -40,7 +40,7 @@ export class TodoController implements Controller {
                 err,
             }, 400);
         }
-    };
+    }
 
     getNextTodos = async (req: any, res: any): Promise<ITodo[]> => {
       try {

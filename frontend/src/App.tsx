@@ -23,7 +23,8 @@ const useStyles = makeStyles({
         width: '80%',
         margin: '15px auto 0 auto',
         paddingBottom: '15px',
-        maxWidth: '700px'
+        marginBottom: '15px',
+        maxWidth: '600px'
     }
 });
 

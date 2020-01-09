@@ -1,5 +1,7 @@
 import {DB, Repo} from '../Repo';
 import {ITodo, QueryResult} from '../types';
+import {Sequelize} from 'sequelize';
+const Op = Sequelize.Op;
 
 export class SequelizeRepo implements Repo {
     db: DB;
@@ -21,10 +23,10 @@ export class SequelizeRepo implements Repo {
 
     getNextTodos = async (lastId: string): Promise<ITodo[]> => {
         try {
-            return await this.db.Todo.findAndCountAll({
+            return await this.db.Todo.findAll({
                 where: {
                     id: {
-                        ['$gt']: lastId,
+                        $gt: lastId,
                     },
                 },
                 limit: 50,
