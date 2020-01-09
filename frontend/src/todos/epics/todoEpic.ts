@@ -1,6 +1,6 @@
 import {ofType} from 'redux-observable';
 import {todoActionsNames} from '../actions/todo';
-import {mergeMap, switchMap} from 'rxjs/operators';
+import {mergeMap} from 'rxjs/operators';
 import {allActions} from '../actions';
 import {sendRequest} from '../../utils/utils';
 

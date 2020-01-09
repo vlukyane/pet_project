@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {ITodo} from '../../common/types';
 import {Typography} from '@material-ui/core';
 
@@ -14,8 +14,9 @@ const TodoInfo: React.FC = (props: any) => {
            setTodo(todoInfo.data);
        };
        fetchTodo();
-    }, []);
+    }, [todoId]);
 
+    console.log('1');
     return(
         <>
             {todo ? (

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, ListItemText, makeStyles, TextField} from '@material-ui/core';
+import {Button, makeStyles, TextField} from '@material-ui/core';
 import TodoEdit from './TodoEdit';
 import {Done} from '@material-ui/icons';
 
