@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TodoController_1 = require("./todos/controllers/TodoController");
 const TodoService_1 = require("./todos/services/TodoService");
 const RepoFactory_1 = require("./todos/repo/RepoFactory");
+const AuthController_1 = require("./auth/controllers/AuthController");
+const AuthService_1 = require("./auth/service/AuthService");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -18,9 +20,12 @@ class App {
         const repo = RepoFactory_1.RepoFactory.create(db);
         const todoService = new TodoService_1.TodoService(repo);
         const todoController = new TodoController_1.TodoController(todoService, app);
-        app.use("/todos", todoController.getRoutes());
+        const authService = new AuthService_1.AuthService(repo);
+        const authController = new AuthController_1.AuthController(authService, app);
+        app.use('/todos', todoController.getRoutes());
+        app.use('', authController.getRoutes());
         return app.listen(port, function () {
-            console.log("Runnning on " + port);
+            console.log('Runnning on ' + port);
         });
     }
 }

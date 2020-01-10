@@ -2,6 +2,8 @@ import {DB} from './todos/repo/Repo';
 import {TodoController} from './todos/controllers/TodoController';
 import {TodoService} from './todos/services/TodoService';
 import {RepoFactory} from './todos/repo/RepoFactory';
+import {AuthController} from "./auth/controllers/AuthController";
+import {AuthService} from "./auth/service/AuthService";
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -22,11 +24,14 @@ export class App {
         const repo = RepoFactory.create(db);
         const todoService = new TodoService(repo);
         const todoController = new TodoController(todoService, app);
+        const authService = new AuthService(repo);
+        const authController = new AuthController(authService, app);
 
-        app.use("/todos", todoController.getRoutes());
+        app.use('/todos', todoController.getRoutes());
+        app.use('', authController.getRoutes());
 
         return app.listen(port, function() {
-            console.log("Runnning on " + port);
+            console.log('Runnning on ' + port);
         });
     }
 }

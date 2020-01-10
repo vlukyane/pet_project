@@ -7,8 +7,8 @@ const connectPsql = () => tslib_1.__awaiter(void 0, void 0, void 0, function* ()
         host: 'localhost',
         dialect: 'postgres',
         define: {
-            timestamps: false
-        }
+            timestamps: false,
+        },
     });
     return psql;
 });
