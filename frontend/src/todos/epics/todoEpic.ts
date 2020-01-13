@@ -7,7 +7,11 @@ import {sendRequest} from '../../utils/utils';
 export const todoFetchEpic = (action$: any) => action$.pipe(
     ofType(todoActionsNames.FETCH_TODOS),
     mergeMap((action: any) =>
-            sendRequest(`todos/${action.payload}`, 'GET')
+            sendRequest(`todos/${action.payload.id}`,
+                'GET',
+                {
+                    'Authorization': 'Bearer ' + action.payload.jwt
+                })
             .then(res => res.json())
             .then(jsonTodos => {
                 const fetchedTodos = Array.isArray(jsonTodos.data) ? jsonTodos.data : [];

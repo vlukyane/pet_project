@@ -24,6 +24,7 @@ export class App {
         const repo = RepoFactory.create(db);
         const todoService = new TodoService(repo);
         const todoController = new TodoController(todoService, app);
+
         const authService = new AuthService(repo);
         const authController = new AuthController(authService, app);
 

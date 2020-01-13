@@ -19,6 +19,7 @@ interface IProps {
 
 const TodoList: React.FC<IProps> = () => {
     const scroll = useSelector((state: any) => state.scroll.scrollStatus);
+    const jwt = useSelector((state: any) => state.user.token);
     const todos: ITodo[] = useSelector((state: any) => {
         return state.todos.list
     });
@@ -87,8 +88,8 @@ const TodoList: React.FC<IProps> = () => {
     }, [isFetching]);
 
     function fetchMoreTodos() {
-        const token = todos.length > 0 ? todos[todos.length - 1].id : '';
-        dispatcher(allActions.todo.fetch(token));
+        const lastId = todos.length > 0 ? todos[todos.length - 1].id : '';
+        dispatcher(allActions.todo.fetch(lastId, jwt));
         setIsFetching(false);
     }
 

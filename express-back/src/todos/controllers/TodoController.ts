@@ -5,6 +5,7 @@ import {TodoService} from '../services/TodoService';
 import {Express, Router} from 'express';
 import {SocketService} from '../../websocket/SocketService';
 
+const jwtMiddleware = require('express-jwt');
 const utils = require('../utils/utils');
 
 export class TodoController implements Controller {
@@ -20,7 +21,7 @@ export class TodoController implements Controller {
     }
 
     private initRoutes() {
-        this.router.get('/', this.getAllTodos);
+        this.router.get('/', jwtMiddleware({secret: 'secret'}), this.getAllTodos);
         this.router.get('/:token', this.getNextTodos);
         this.router.post('/add', this.addNewTodo);
         this.router.delete('/delete/:id', this.deleteTodoById);

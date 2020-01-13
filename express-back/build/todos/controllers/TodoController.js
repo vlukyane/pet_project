@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const express_1 = require("express");
 const SocketService_1 = require("../../websocket/SocketService");
+const jwtMiddleware = require('express-jwt');
 const utils = require('../utils/utils');
 class TodoController {
     constructor(todoService, app) {
@@ -104,7 +105,7 @@ class TodoController {
         this.initRoutes();
     }
     initRoutes() {
-        this.router.get('/', this.getAllTodos);
+        this.router.get('/', jwtMiddleware({ secret: 'secret' }), this.getAllTodos);
         this.router.get('/:token', this.getNextTodos);
         this.router.post('/add', this.addNewTodo);
         this.router.delete('/delete/:id', this.deleteTodoById);

@@ -9,8 +9,8 @@ export class MongoDB {
             console.log('Connection to mongoDB has been established successfully');
         });
         return {
-            db :mongoose,
-            type :'mongo'
+            db: mongoose,
+            type: 'mongo',
         };
     }
 }

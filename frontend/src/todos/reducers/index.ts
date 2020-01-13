@@ -1,8 +1,10 @@
 import {todos} from './todos';
 import {scroll} from './scroll';
 import {combineReducers} from 'redux';
+import {user} from "./user";
 
 export const rootReducer = combineReducers({
     todos,
-    scroll
+    scroll,
+    user
 });

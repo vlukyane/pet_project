@@ -27,38 +27,41 @@ export class AuthController {
         const {userPassword, userEmail} = req.body;
         const foundedUser = await User.findOne({email: userEmail});
         if (foundedUser) {
-            bcrypt.compare(userPassword, foundedUser.password, (err, result) => {
+            bcrypt.compare(userPassword, foundedUser.password, async (err, result) => {
                 if (err) {
                     return utils.sendResponse(res, {
+                        success: null,
                         error: err,
                     }, 500);
                 }
                 if (result) {
-                    const JWTToken = jwt.sign({
+                    const JWTToken = jwt.sign(
+                        {
                             email: foundedUser.email,
                             _id: foundedUser._id,
                         },
-                        'secret',
-                        {
-                            expiresIn: '2h',
-                        });
+                        'secret');
+                    console.log('??', JWTToken, userPassword, foundedUser.password, result);
                     return utils.sendResponse(res, {
+                        success: 'Token created!',
+                        error: null,
                         data: JWTToken,
                     }, 200);
                 }
                 return utils.sendResponse(res, {
-                    failed: 'Unauthorized Access',
+                    success: null,
+                    error: 'Wrong email or password',
                 }, 500);
-                return res.status(401).json({
-                });
             });
+        } else {
+            return utils.sendResponse(res, {
+                error: 'User does not exist',
+            }, 500);
         }
-        return;
-    };
+    }
 
     public signUp = async (req: any, res) => {
         const {userPassword, userEmail} = req.body;
-        console.log('IM here!: ', req.body, userEmail, userPassword);
         bcrypt.hash(userPassword, 10, async (err, hashedPassword) => {
             if (err) {
                 return utils.sendResponse(res, {
@@ -71,17 +74,8 @@ export class AuthController {
                 });
                 try {
                     const response =  await newUser.save();
-                    const JToken = jwt.sign({
-                            email: newUser.email,
-                            _id: newUser.password,
-                        },
-                        'secret',
-                        {
-                            expiresIn: '2h',
-                        });
                     return res.status(200).json({
-                        success: 'Welcome to the JWT Auth',
-                        token: JToken,
+                        success: 'new user created',
                     });
                 } catch (err) {
                     console.log('ERROR! ', err);
@@ -93,5 +87,3 @@ export class AuthController {
         });
     }
 }
-
-

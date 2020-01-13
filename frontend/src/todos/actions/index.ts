@@ -1,7 +1,9 @@
 import {todo} from './todo';
 import {scroll} from './scroll';
+import {user} from "./user";
 
 export const allActions = {
-    todo: todo,
-    scroll: scroll
+    todo,
+    scroll,
+    user
 };
