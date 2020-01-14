@@ -32,6 +32,7 @@ export class TodoController implements Controller {
     getAllTodos = async (req, res): Promise<ITodo[]> => {
         try {
             const allTodos = await this.todoService.getAllTodos();
+            console.log('context: ', req.ctx);
             return utils.sendResponse(res, {
                 data: allTodos,
             }, 200);

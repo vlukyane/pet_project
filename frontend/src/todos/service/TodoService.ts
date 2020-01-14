@@ -19,13 +19,12 @@ export class TodoService{
         const todoToAdd = {
             content: content
         };
-        const kek = await sendRequest('todos/add', 'POST',
+        await sendRequest('todos/add', 'POST',
             {
                 'Content-Type': 'application/json',
             },
             JSON.stringify(todoToAdd)
         );
-        console.log(kek);
     }
 
     static async deleteTodo(id: string, todos: ITodo[]): Promise<void> {

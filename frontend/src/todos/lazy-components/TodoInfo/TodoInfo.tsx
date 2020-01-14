@@ -16,7 +16,6 @@ const TodoInfo: React.FC = (props: any) => {
        fetchTodo();
     }, [todoId]);
 
-    console.log('1');
     return(
         <>
             {todo ? (

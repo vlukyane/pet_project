@@ -7,6 +7,7 @@ import {TodoService} from '../../service/TodoService';
 import {List as VirtualizedList} from 'react-virtualized';
 import {useDispatch, useSelector} from 'react-redux';
 import {allActions} from '../../actions';
+import {CookieService} from "../../../auth/service/CookieService";
 
 
 export interface UpdateTodoData {
@@ -28,6 +29,11 @@ const TodoList: React.FC<IProps> = () => {
 
     const [isFetching, setIsFetching] = useState(needToFirstLoadTodos);
     const [listScroll, setListScroll] = useState(scroll);
+
+    const logOutEvent = () => {
+        dispatcher(allActions.user.logOut());
+        CookieService.remove('sign_in');
+    };
 
     const switchTodo = async (id: string) => {
         await TodoService.switchTodo(id, todos);
@@ -99,6 +105,7 @@ const TodoList: React.FC<IProps> = () => {
 
     return (
         <>
+            <button onClick={() => logOutEvent() }> Log out </button>
             <TodoListTitle/>
             <AddTodo
                 addTodo={addTodo}
