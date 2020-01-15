@@ -29,7 +29,8 @@ export class AuthController {
 
     public signUp = async (req: any, res) => {
         const {userPassword, userEmail} = req.body;
-        const {data, code} = await this.service.signUp(userEmail, userPassword);
+        const response = await this.service.signUp(userEmail, userPassword);
+        const {data, code} = response;
         return utils.sendResponse(res, data, code);
     }
 }

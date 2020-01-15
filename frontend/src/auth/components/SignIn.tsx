@@ -8,7 +8,6 @@ interface IProps {
 }
 
 const SignIn: React.FC<IProps> = () => {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();

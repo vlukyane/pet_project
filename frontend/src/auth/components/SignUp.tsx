@@ -3,10 +3,9 @@ import {Link, useHistory} from "react-router-dom";
 import {AuthService} from "../service/AuthService";
 
 interface IProps {
-    setter: any
 }
 
-const SignUp: React.FC<IProps> = ({setter}) => {
+const SignUp: React.FC<IProps> = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

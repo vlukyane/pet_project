@@ -24,7 +24,6 @@ export class AuthService {
                         },
                         'secret',
                     );
-                    console.log('opa');
                     return {
                         data: {
                             success: 'Token created!',
@@ -54,36 +53,26 @@ export class AuthService {
     }
 
     signUp = async (userEmail: string, userPassword: string) => {
-        bcrypt.hash(userPassword, 10, async (err, hashedPassword) => {
-            if (err) {
-                return {
-                    data: {
-                        error: err,
-                    },
-                    code: 500,
-                };
-            } else {
-                const newUser = new User({
-                    email: userEmail,
-                    password: hashedPassword,
-                });
-                try {
-                    const response =  await newUser.save();
-                    return {
-                        data: {
-                            success: 'new user created',
-                        },
-                        code: 200,
-                    };
-                } catch (err) {
-                    return {
-                        data: {
-                            error: err,
-                        },
-                        code: 500,
-                    };
-                }
-            }
-        });
+        try {
+            const hashedPassword = await bcrypt.hash(userPassword, 10);
+            const newUser = new User({
+                email: userEmail,
+                password: hashedPassword,
+            });
+            await newUser.save();
+            return {
+                data: {
+                    success: 'new user created',
+                },
+                code: 200,
+            };
+        } catch (err) {
+            return {
+                data: {
+                    error: err,
+                },
+                code: 500,
+            };
+        }
     }
 }
