@@ -1,21 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sendResponse = (res, data, code = 200) => {
-    let send_data = {};
+    let sendData = {};
     if (code >= 400 && code <= 451) {
-        send_data.success = false;
-        send_data.error = true;
+        sendData.success = false;
+        sendData.error = true;
     }
     else if (code >= 200 && code <= 226) {
-        send_data.success = true;
-        send_data.error = false;
+        sendData.success = true;
+        sendData.error = false;
     }
     if (typeof data === 'object') {
-        send_data = Object.assign(send_data, data);
+        sendData = Object.assign(sendData, data);
     }
-    res.statusCode = code;
-    return res.send(send_data);
+    res.status(code);
+    return res.send(sendData);
 };
 module.exports = {
-    sendResponse
+    sendResponse,
 };

@@ -2,7 +2,7 @@ import {App} from './App';
 import {MongoDB} from './todos/repo/mongo/MongoDB';
 import {DB} from './todos/repo/Repo';
 import {PostgresDB} from './todos/repo/sql/PostgresDB';
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 import {Express} from 'express';
 import {SocketServer} from './websocket/SocketServer';
 dotenv.config();

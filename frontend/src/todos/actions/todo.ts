@@ -1,8 +1,8 @@
 import {ITodo} from '../common/types';
 
-const fetch = (id: string) => ({
+const fetch = (id: string, jwt: string) => ({
     type: todoActionsNames.FETCH_TODOS,
-    payload: id
+    payload: { id, jwt }
 });
 
 const fetchFulfilled = (todos: ITodo[]) => {

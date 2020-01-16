@@ -9,7 +9,7 @@ class MongoDB {
         });
         return {
             db: mongoose,
-            type: 'mongo'
+            type: 'mongo',
         };
     }
 }

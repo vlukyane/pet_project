@@ -1,22 +1,21 @@
 import { IResponse } from './types';
 
 const sendResponse = (res, data, code = 200) => {
-    let send_data = <IResponse>{};
-    if(code >= 400 && code <= 451) {
-        send_data.success = false;
-        send_data.error = true;
-    }
-    else if(code >= 200 && code <= 226) {
-        send_data.success = true;
-        send_data.error = false;
+    let sendData = <IResponse>{};
+    if (code >= 400 && code <= 451) {
+        sendData.success = false;
+        sendData.error = true;
+    } else if (code >= 200 && code <= 226) {
+        sendData.success = true;
+        sendData.error = false;
     }
     if (typeof data === 'object') {
-        send_data = Object.assign(send_data, data);
+        sendData = Object.assign(sendData, data);
     }
-    res.statusCode = code;
-    return res.send(send_data);
+    res.status(code);
+    return res.send(sendData);
 };
 
 module.exports = {
-    sendResponse
+    sendResponse,
 };
