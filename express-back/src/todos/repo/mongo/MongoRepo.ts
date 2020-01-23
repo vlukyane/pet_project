@@ -73,7 +73,7 @@ export class MongoRepo implements Repo {
                 },
                 {
                     content: updatedTodo.content,
-                    isCompleted: updatedTodo.isCompleted
+                    isCompleted: updatedTodo.isCompleted,
                 },
             );
         } catch (err) {

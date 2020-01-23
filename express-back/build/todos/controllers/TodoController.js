@@ -10,7 +10,7 @@ class TodoController {
         this.getAllTodos = (req, res) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 const allTodos = yield this.todoService.getAllTodos();
-                // console.log('context: ', req.ctx);
+                console.log('context: ', req.ctx);
                 return utils.sendResponse(res, {
                     data: allTodos,
                 }, 200);
@@ -87,7 +87,7 @@ class TodoController {
             try {
                 const id = req.params.id;
                 const updatedTodo = yield this.todoService.updateTodoById(id, req.body);
-                SocketService_1.SocketService.updateTodoById(id, updatedTodo);
+                SocketService_1.SocketService.updateTodoById(id, updatedTodo, req.ctx.email);
                 return utils.sendResponse(res, {
                     message: 'Successfully update todo',
                 }, 200);
@@ -107,11 +107,11 @@ class TodoController {
     }
     initRoutes() {
         this.router.get('/', jwtMiddleware({ secret: 'secret' }), this.getAllTodos);
-        this.router.get('/:token', this.getNextTodos);
-        this.router.post('/add', this.addNewTodo);
-        this.router.delete('/delete/:id', this.deleteTodoById);
-        this.router.put('/update/:id', this.updateTodoById);
-        this.router.get('/info/:id', this.getTodoById);
+        this.router.get('/:token', jwtMiddleware({ secret: 'secret' }), this.getNextTodos);
+        this.router.post('/add', jwtMiddleware({ secret: 'secret' }), this.addNewTodo);
+        this.router.delete('/delete/:id', jwtMiddleware({ secret: 'secret' }), this.deleteTodoById);
+        this.router.put('/update/:id', jwtMiddleware({ secret: 'secret' }), this.updateTodoById);
+        this.router.get('/info/:id', jwtMiddleware({ secret: 'secret' }), this.getTodoById);
     }
 }
 exports.TodoController = TodoController;

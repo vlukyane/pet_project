@@ -12,9 +12,10 @@ class SocketService {
             index_1.wssClients[socketId].emit('deleteTodoById', id);
         });
     }
-    static updateTodoById(id, updatedTodo) {
+    static updateTodoById(id, updatedTodo, ctx) {
+        console.log('CTX IN SOCKET: ', ctx);
         Object.keys(index_1.wssClients).forEach((socketId) => {
-            index_1.wssClients[socketId].emit('updateTodoById', { id, updatedTodo });
+            index_1.wssClients[socketId].emit('updateTodoById', { id, updatedTodo, ctx });
         });
     }
 }

@@ -39,7 +39,7 @@ export const todos = (state = initialState, action: any) => {
             };
 
         case 'UPDATE_TODO':
-            const {id, content, isEditing, isCompleted} = action.payload;
+            const {id, content, isEditing, isCompleted, ctx} = action.payload;
             return {
                 ...state,
                 list: state.list.map((todo: ITodo): ITodo =>
@@ -49,7 +49,8 @@ export const todos = (state = initialState, action: any) => {
                             ...todo,
                             isCompleted,
                             isEditing,
-                            content
+                            content,
+                            ctx,
                         }
                 )
             };

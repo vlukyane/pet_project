@@ -8,17 +8,23 @@ import {List as VirtualizedList} from 'react-virtualized';
 import {useDispatch, useSelector} from 'react-redux';
 import {allActions} from '../../actions';
 import {CookieService} from "../../../auth/service/CookieService";
+import TodoHeader from "../TodoHeader/TodoHeader";
+import {Button, makeStyles} from "@material-ui/core";
 
 
 export interface UpdateTodoData {
     updatedTodo: ITodo,
-    id: string
+    id: string,
+    ctx?: string,
 }
 
-interface IProps {
-}
+const useStyles = makeStyles({
+    buttonLogOut: {
+        border: 'solid black 0.5px'
+    },
+});
 
-const TodoList: React.FC<IProps> = () => {
+const TodoList: React.FC = () => {
     const scroll = useSelector((state: any) => state.scroll.scrollStatus);
     const jwt = useSelector((state: any) => state.user.token);
     const todos: ITodo[] = useSelector((state: any) => {
@@ -29,6 +35,8 @@ const TodoList: React.FC<IProps> = () => {
 
     const [isFetching, setIsFetching] = useState(needToFirstLoadTodos);
     const [listScroll, setListScroll] = useState(scroll);
+
+    const classes = useStyles();
 
     const logOutEvent = () => {
         dispatcher(allActions.user.logOut());
@@ -105,7 +113,8 @@ const TodoList: React.FC<IProps> = () => {
 
     return (
         <>
-            <button onClick={() => logOutEvent() }> Log out </button>
+            <TodoHeader/>
+            <Button className={classes.buttonLogOut} onClick={() => logOutEvent() }> Log out </Button>
             <TodoListTitle/>
             <AddTodo
                 addTodo={addTodo}

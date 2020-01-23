@@ -11,6 +11,9 @@ const Todo = new Schema({
     isEditing: {
         type: Boolean,
     },
+    // lastUpdatedBy: {
+    //     type: String,
+    // },
 });
 
 Todo.set('toJSON', {

@@ -6,6 +6,7 @@ import {Button, Checkbox, ListItem} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {Info} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import LastUpdated from "./components/LastUpdated";
 
 interface IProps {
     todo: ITodo,
@@ -81,6 +82,7 @@ export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo
             <TodoDelete
                 deleteTodo = {handleDeleteTodo}
             />
+            <LastUpdated email={todo.ctx? todo.ctx : ''}/>
         </ListItem>
     )
 };

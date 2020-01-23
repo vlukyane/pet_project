@@ -23,6 +23,9 @@ class SequelizeRepo {
                             $gt: lastId,
                         },
                     },
+                    order: [
+                        ['id', 'DESC'],
+                    ],
                     limit: 50,
                 });
             }

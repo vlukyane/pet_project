@@ -3,7 +3,7 @@ export class CookieService {
 
         const now = new Date();
         const time = now.getTime();
-        now.setTime(time + 1000 * 120);
+        now.setTime(time + 1000 * 1200);
         options = {
             path: '/',
             ...options,

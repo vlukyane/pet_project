@@ -11,7 +11,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/todos_huge');
 //     });
 
 Todo.find()
-    .then(res => {
+    .then((res) => {
         console.log('RES', res.length);
     });
 

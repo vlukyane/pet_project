@@ -2,18 +2,23 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {ITodo} from '../../common/types';
 import {Typography} from '@material-ui/core';
+import {sendRequest} from "../../../utils/utils";
 
 const TodoInfo: React.FC = (props: any) => {
 
     const [todo, setTodo] = useState<ITodo>();
     const todoId: string = props.match.params.todoId;
     useEffect(() => {
-       const fetchTodo = async () => {
-           const rawTodo = await fetch(`http://localhost:3001/todos/info/${todoId}`);
+       (async () => {
+           const rawTodo = await sendRequest(`todos/info/${todoId}`,
+               'GET',
+               {
+                   'Content-Type': 'application/json',
+               },
+           );
            const todoInfo = await rawTodo.json();
            setTodo(todoInfo.data);
-       };
-       fetchTodo();
+       })();
     }, [todoId]);
 
     return(

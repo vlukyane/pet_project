@@ -28,10 +28,19 @@ class PostgresDB {
                 type: sequelize_1.Sequelize.BOOLEAN,
             },
         });
+        const User = psql.define('User', {
+            email: {
+                type: sequelize_1.Sequelize.STRING,
+            },
+            password: {
+                type: sequelize_1.Sequelize.STRING,
+            },
+        });
         return {
             db: psql,
             type: 'postgres',
             Todo,
+            User,
         };
     }
 }

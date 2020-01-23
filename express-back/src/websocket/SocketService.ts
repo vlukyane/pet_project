@@ -13,9 +13,10 @@ export class SocketService {
         });
     }
 
-    static updateTodoById(id: string, updatedTodo: ITodo) {
+    static updateTodoById(id: string, updatedTodo: ITodo, ctx: string) {
+        console.log('CTX IN SOCKET: ', ctx);
         Object.keys(wssClients).forEach( (socketId: string) => {
-            wssClients[socketId].emit('updateTodoById', { id, updatedTodo });
+            wssClients[socketId].emit('updateTodoById', { id, updatedTodo, ctx });
         });
     }
 }

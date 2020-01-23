@@ -58,7 +58,7 @@ class MongoRepo {
                     _id: id,
                 }, {
                     content: updatedTodo.content,
-                    isCompleted: updatedTodo.isCompleted
+                    isCompleted: updatedTodo.isCompleted,
                 });
             }
             catch (err) {

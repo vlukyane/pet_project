@@ -1,10 +1,9 @@
-import React, {Suspense, useEffect, useState} from 'react';
+import React, {Suspense} from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import TodoList from './todos/components/TodoList/TodoList';
 import Paper from '@material-ui/core/Paper';
 import {ThemeProvider} from '@material-ui/styles';
 import {theme} from './theme';
-import TodoHeader from './todos/components/TodoHeader/TodoHeader';
 import {makeStyles} from "@material-ui/core";
 import SocketProvier from "./providers/SocketProvider";
 import SignIn from "./auth/components/SignIn";
@@ -39,7 +38,6 @@ const App: React.FC = () => {
             <BrowserRouter>
                 <ThemeProvider theme={theme}>
                     <Paper className={classes.container}>
-                        <TodoHeader/>
                         <Switch>
 
                             <Route exact path={'/'} render={() =>
@@ -64,3 +62,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+
