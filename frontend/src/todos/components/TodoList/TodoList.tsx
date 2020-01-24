@@ -64,7 +64,7 @@ const TodoList: React.FC = () => {
         if (content === '') {
             return;
         }
-        await TodoService.updateTodo(content, id, todos);
+        await TodoService.updateTodo(content, id, todos, dispatcher);
     };
 
     // @ts-ignore

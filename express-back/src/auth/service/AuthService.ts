@@ -50,6 +50,13 @@ export class AuthService {
                 };
             }
         }
+        return {
+            data: {
+                success: null,
+                error: 'User not found',
+            },
+            code: 500,
+        };
     }
 
     signUp = async (userEmail: string, userPassword: string) => {

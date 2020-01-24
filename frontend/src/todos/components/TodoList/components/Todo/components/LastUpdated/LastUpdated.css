@@ -1,0 +1,13 @@
+.last-updated {
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.fadeOut {
+    animation-name: fadeOut;
+    animation-duration: 5s;
+    animation-delay: 2s;
+}

@@ -49,6 +49,12 @@ const useStyles = makeStyles({
         background: 'transparent',
         padding: '0 7px 0 0',
         marginBottom: '10px',
+    },
+    errorSpan: {
+        pointerEvents: 'none',
+        fontSize: '13px',
+        lineHeight: '1.5',
+        color: '#aa0914',
     }
 });
 
@@ -56,6 +62,7 @@ const useStyles = makeStyles({
 const SignIn: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const history = useHistory();
     const classes = useStyles();
     const dispatcher = useDispatch();
@@ -75,6 +82,7 @@ const SignIn: React.FC = () => {
         e.preventDefault();
         const {error, token } = await AuthService.signIn(email, password);
         if (error) {
+            setError(error);
             console.log(error);
             return;
         }
@@ -107,6 +115,9 @@ const SignIn: React.FC = () => {
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
+                <span className={classes.errorSpan}>
+                    {error}
+                </span>
                 <Button className={classes.signIn} type='submit' value={''}>
                     Sign in
                 </Button>

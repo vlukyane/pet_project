@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, ClickAwayListener, makeStyles, TextField} from '@material-ui/core';
 import TodoEdit from './TodoEdit';
 import {Done} from '@material-ui/icons';
@@ -19,6 +19,10 @@ const useStyles = makeStyles({
 
 const TodoContent: React.FC<IProps> = ({ content, isCompleted, isEditing, editTodo, updateTodo }) => {
     const [term, setTerm] = useState<string>(content || '');
+
+    useEffect(() => {
+        setTerm(content);
+    }, [content]);
 
     const classes = useStyles();
 

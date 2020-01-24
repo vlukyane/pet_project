@@ -6,6 +6,7 @@ const checkCookie = async () => {
     const cookieRaw = await CookieService.get('sign_in');
     if (cookieRaw === '') return '';
     const cookieData = await JSON.parse(cookieRaw);
+    if (cookieData === '') return '';
     return {
         'Authorization': 'Bearer ' + cookieData.token
     }
