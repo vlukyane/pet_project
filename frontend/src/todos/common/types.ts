@@ -4,5 +4,8 @@ export interface ITodo {
     content: string,
     isCompleted: boolean,
     isEditing: boolean,
-    ctx?: string,
+    ctx?: {
+        email: string,
+        color: string,
+    },
 }

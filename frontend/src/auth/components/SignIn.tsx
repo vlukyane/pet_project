@@ -80,7 +80,8 @@ const SignIn: React.FC = () => {
 
     const signInAction = async (e: any) => {
         e.preventDefault();
-        const {error, token } = await AuthService.signIn(email, password);
+        const response = await AuthService.signIn(email, password);
+        const {error, token} = response;
         if (error) {
             setError(error);
             console.log(error);

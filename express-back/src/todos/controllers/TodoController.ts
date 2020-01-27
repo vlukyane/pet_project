@@ -32,7 +32,6 @@ export class TodoController implements Controller {
     getAllTodos = async (req, res): Promise<ITodo[]> => {
         try {
             const allTodos = await this.todoService.getAllTodos();
-            console.log('context: ', req.ctx);
             return utils.sendResponse(res, {
                 data: allTodos,
             }, 200);
@@ -113,7 +112,7 @@ export class TodoController implements Controller {
         try {
             const id: string = req.params.id;
             const updatedTodo = await this.todoService.updateTodoById(id, req.body);
-            SocketService.updateTodoById(id, updatedTodo, req.ctx.email);
+            SocketService.updateTodoById(id, updatedTodo, req.ctx);
 
             return utils.sendResponse(res, {
                 message: 'Successfully update todo',

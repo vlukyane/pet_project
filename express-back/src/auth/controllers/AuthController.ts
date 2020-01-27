@@ -24,6 +24,7 @@ export class AuthController {
         const {userPassword, userEmail} = req.body;
         const response = await this.service.signIn(userEmail, userPassword);
         const {data, code} = response;
+        console.log('DATA: ', data);
         return utils.sendResponse(res, data, code);
     }
 

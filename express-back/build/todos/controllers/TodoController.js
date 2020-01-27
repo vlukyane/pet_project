@@ -87,7 +87,7 @@ class TodoController {
             try {
                 const id = req.params.id;
                 const updatedTodo = yield this.todoService.updateTodoById(id, req.body);
-                SocketService_1.SocketService.updateTodoById(id, updatedTodo, req.ctx.email);
+                SocketService_1.SocketService.updateTodoById(id, updatedTodo, req.ctx);
                 return utils.sendResponse(res, {
                     message: 'Successfully update todo',
                 }, 200);

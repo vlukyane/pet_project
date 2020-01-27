@@ -82,7 +82,7 @@ export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo
             <TodoDelete
                 deleteTodo = {handleDeleteTodo}
             />
-            <LastUpdated email={todo.ctx? todo.ctx : ''} content={todo.content} isCompleted={todo.isCompleted}/>
+            <LastUpdated ctx={todo.ctx !== undefined ? todo.ctx : {email: '', color: ''}} content={todo.content} isCompleted={todo.isCompleted}/>
         </ListItem>
     )
 };
