@@ -10,7 +10,6 @@ class TodoController {
         this.getAllTodos = (req, res) => tslib_1.__awaiter(this, void 0, void 0, function* () {
             try {
                 const allTodos = yield this.todoService.getAllTodos();
-                console.log('context: ', req.ctx);
                 return utils.sendResponse(res, {
                     data: allTodos,
                 }, 200);

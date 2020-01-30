@@ -22,7 +22,10 @@ const SocketProvider: React.FC<IProps> = ({children}) => {
     }, [todos]);
 
     useEffect(() => {
-        socket.on('addTodo', (todo: ITodo) => SocketService.addTodo(todo, dispatcher));
+        socket.on('addTodo', (todo: ITodo) => {
+            console.log('OPA');
+            SocketService.addTodo(todo, dispatcher)
+        });
         return () => socket.off('addTodo');
     }, [todos]);
 
