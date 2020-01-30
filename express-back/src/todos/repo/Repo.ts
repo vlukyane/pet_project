@@ -18,8 +18,9 @@ export interface Repo {
 }
 
 export interface DB {
-    db :any;
-    Todo ?:any;
-    type :string
+    db: any;
+    Todo?: any;
+    User?: any;
+    type: string;
 }
 

@@ -29,6 +29,9 @@ export class SequelizeRepo implements Repo {
                         $gt: lastId,
                     },
                 },
+                order: [
+                    ['id', 'DESC'],
+                ],
                 limit: 50,
             });
         } catch (err) {

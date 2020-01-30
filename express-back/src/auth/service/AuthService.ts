@@ -3,6 +3,8 @@ import User from "../../todos/repo/mongo/models/User";
 import bcrypt from "bcrypt";
 
 const jwt = require('jsonwebtoken');
+const {getRandomColor} = require('../utils/ColorCreator');
+
 
 export class AuthService {
     repo: Repo;
@@ -17,10 +19,12 @@ export class AuthService {
             try {
                 const comparer = await bcrypt.compare(userPassword, foundedUser.password);
                 if (comparer) {
+                    const color = getRandomColor();
                     const JWTToken = jwt.sign(
                         {
                             email: foundedUser.email,
                             _id: foundedUser._id,
+                            color,
                         },
                         'secret',
                     );
@@ -50,6 +54,13 @@ export class AuthService {
                 };
             }
         }
+        return {
+            data: {
+                success: null,
+                error: 'User not found',
+            },
+            code: 500,
+        };
     }
 
     signUp = async (userEmail: string, userPassword: string) => {

@@ -30,10 +30,21 @@ export class PostgresDB {
                 type: Sequelize.BOOLEAN,
             },
         });
+
+        const User = psql.define('User', {
+            email: {
+                type: Sequelize.STRING,
+            },
+            password: {
+                type: Sequelize.STRING,
+            },
+        });
+
         return {
             db: psql,
             type: 'postgres',
             Todo,
+            User,
         };
     }
 }

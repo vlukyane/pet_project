@@ -3,5 +3,9 @@ export interface ITodo {
     id: string,
     content: string,
     isCompleted: boolean,
-    isEditing: boolean
+    isEditing: boolean,
+    ctx?: {
+        email: string,
+        color: string,
+    },
 }

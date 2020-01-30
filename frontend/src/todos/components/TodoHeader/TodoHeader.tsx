@@ -1,7 +1,5 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {allActions} from "../../actions";
-import {CookieService} from "../../../auth/service/CookieService";
+import {useSelector} from 'react-redux';
 
 interface IProps {
 }

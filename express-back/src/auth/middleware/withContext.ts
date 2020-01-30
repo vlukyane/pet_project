@@ -8,8 +8,10 @@ const withContext = (req, res, next) => {
     const decoded = jwt.verify(token, 'secret');
     const ctx: ICtx = {
       email: decoded.email,
+      color: decoded.color,
     };
     req.ctx = ctx;
+    console.log('REQ!!! : ', req.ctx);
   }
   next();
 };

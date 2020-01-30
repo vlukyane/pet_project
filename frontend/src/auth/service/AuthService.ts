@@ -16,7 +16,7 @@ export class AuthService {
         return await response.json();
     }
 
-    static async logIn(userEmail: string, userPassword: string) {
+    static async signIn(userEmail: string, userPassword: string) {
         const userCreditials = {
             userEmail,
             userPassword

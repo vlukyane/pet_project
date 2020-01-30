@@ -18,8 +18,8 @@ export class SocketService {
     }
 
     static updateTodoById(data: UpdateTodoData, dispatcher: any) {
-        const {updatedTodo, id} = data;
+        const {updatedTodo, id, ctx} = data;
         const {content, isEditing, isCompleted} = updatedTodo;
-        dispatcher(allActions.todo.update({content, isEditing, isCompleted, id}));
+        dispatcher(allActions.todo.update({content, isEditing, isCompleted, id, ctx}));
     }
 }

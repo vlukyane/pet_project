@@ -6,6 +6,7 @@ import {Button, Checkbox, ListItem} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {Info} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import LastUpdated from "./components/LastUpdated/LastUpdated";
 
 interface IProps {
     todo: ITodo,
@@ -38,8 +39,6 @@ const useStyles = makeStyles({
 
 export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo, updateTodo, updateScroll }) =>{
 
-    const classes = useStyles();
-
     const handleEditTodo = () => {
         editTodo(todo.id)
     };
@@ -55,6 +54,8 @@ export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo
     const handleUpdateTodo = (content: string) => {
         updateTodo(todo.id, content);
     };
+
+    const classes = useStyles();
 
     return (
         <ListItem className = {classes.todoItem}>
@@ -81,6 +82,7 @@ export const Todo: React.FC<IProps>  = ({ todo, switchTodo, deleteTodo, editTodo
             <TodoDelete
                 deleteTodo = {handleDeleteTodo}
             />
+            <LastUpdated ctx={todo.ctx !== undefined ? todo.ctx : {email: '', color: ''}} content={todo.content} isCompleted={todo.isCompleted}/>
         </ListItem>
     )
 };

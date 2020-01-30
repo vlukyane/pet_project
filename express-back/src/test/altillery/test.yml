@@ -1,0 +1,14 @@
+config:
+  target: "http://127.0.0.1:3001"
+  phases:
+    - duration: 300
+      arrivalRate: 100
+  socketio:
+    transports: ['websocket']
+scenarios:
+  - engine: "socketio"
+    flow:
+      - emit:
+          channel: 'addTodo'
+          data: { 'id': '123', 'content': 'kek', 'isEditing': 'false', 'isCompleted': 'false' }
+      - think: 10

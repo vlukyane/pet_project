@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button, makeStyles, TextField} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
+import {Button, ClickAwayListener, makeStyles, TextField} from '@material-ui/core';
 import TodoEdit from './TodoEdit';
 import {Done} from '@material-ui/icons';
 
@@ -20,13 +20,17 @@ const useStyles = makeStyles({
 const TodoContent: React.FC<IProps> = ({ content, isCompleted, isEditing, editTodo, updateTodo }) => {
     const [term, setTerm] = useState<string>(content || '');
 
+    useEffect(() => {
+        setTerm(content);
+    }, [content]);
+
     const classes = useStyles();
 
     const onInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         if (event.target.value === null) return;
         setTerm(event.target.value);
     };
-    const onFormSubmit = (event: React.FormEvent<HTMLFormElement  | HTMLButtonElement>): void => {
+    const onFormSubmit = (event: React.FormEvent<HTMLFormElement  | HTMLButtonElement> | React.MouseEvent<Document, MouseEvent>): void => {
         event.preventDefault();
         updateTodo(term);
     };
@@ -41,23 +45,19 @@ const TodoContent: React.FC<IProps> = ({ content, isCompleted, isEditing, editTo
             <div className={`todo-content ${isCompleted ? classes.completed : ''}`} onClick={() => handleEdit() }>
                 {content}
             </div>
-
-            <TodoEdit
-                editTodo = {editTodo}
-                enableButton = {!isCompleted}
-            />
         </>
 
         :
         <>
+            <ClickAwayListener onClickAway={ (e) => onFormSubmit(e)}>
             <form onSubmit={(e) => onFormSubmit(e)}>
                 <TextField
                     value={term}
                     type="text"
                    onChange={e => onInputChange(e)}
                 />
-                <Button onClick={ (e) => onFormSubmit(e)}> <Done/> </Button>
             </form>
+            </ClickAwayListener>
         </>
     )
 };

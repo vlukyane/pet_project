@@ -40,8 +40,12 @@ export class TodoService{
         dispatcher(allActions.todo.edit(id));
     }
 
-    static async updateTodo(content: string, id: string, todos: ITodo[]): Promise<void> {
+    static async updateTodo(content: string, id: string, todos: ITodo[], dispatcher: any): Promise<void> {
         const editedTodo: ITodo = todos.filter((todo) => todo.id === id)[0];
+        if (content === editedTodo.content) {
+            dispatcher(allActions.todo.edit(id));
+            return;
+        }
         editedTodo.isEditing = !editedTodo.isEditing;
         editedTodo.content = content;
         await sendRequest(`todos/update/${id}`,
