@@ -71,6 +71,7 @@ const SignIn: React.FC = () => {
         (async () => {
             const userCookie = await CookieService.get('sign_in');
             if (!userCookie) return;
+            console.log(userCookie);
             const cookieData = JSON.parse(userCookie);
             if (cookieData === '') return;
             dispatcher(allActions.user.logIn(cookieData.email, cookieData.token));

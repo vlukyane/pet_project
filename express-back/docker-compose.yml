@@ -1,0 +1,23 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    restart: on-failure
+    build: ../express-back/
+    ports:
+      - '3001:3001'
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: mongoDB
+    restart: on-failure
+    image: mongo
+    expose:
+      - '27017'
+    ports:
+      - '27017:27017'
+networks:
+  project_network:
+    external: true
+
