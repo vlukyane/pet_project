@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: todos-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todos-backend
+  template:
+    metadata:
+      labels:
+        app: todos-backend
+    spec:
+      containers:
+        - name: todos-backend
+          image: vlukyane/todos:backendv1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3001
+      restartPolicy: Always

@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: todos-frontend-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todos-frontend-nginx
+  template:
+    metadata:
+      labels:
+        app: todos-frontend-nginx
+    spec:
+      containers:
+        - name: todos-frontend-nginx
+          image: vlukyane/todos:frontend-nginx
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      restartPolicy: Always

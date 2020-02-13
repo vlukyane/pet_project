@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: todos-web
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: "/todos"
+            backend:
+              serviceName: todos-backend-svc
+              servicePort: 80
+          - path: "/signin"
+              backend:
+                serviceName: todos-backend-svc
+                servicePort: 80
+          - path: "/signup"
+              backend:
+                serviceName: todos-backend-svc
+                servicePort: 80
+          - path: "/"
+            backend:
+              serviceName: todos-frontend-svc
+              servicePort: 80

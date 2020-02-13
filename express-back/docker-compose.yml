@@ -3,7 +3,7 @@ services:
   backend:
     container_name: backend
     restart: on-failure
-    build: ../express-back/
+    image: vlukyane/todos:backendv1
     ports:
       - '3001:3001'
     depends_on:

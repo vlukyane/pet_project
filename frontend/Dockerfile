@@ -1,13 +1,4 @@
-FROM node:12.12
-
-WORKDIR /usr/src/app/frontend/
-
-COPY package*.json ./
-
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+FROM nginx:1.17
+COPY build/ /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
