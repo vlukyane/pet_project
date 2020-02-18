@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 export class MongoDB {
     static init (): DB {
-        mongoose.connect('mongodb://mongo:27017/todos_huge', {useNewUrlParser: true});
+        mongoose.connect('mongodb://todos-mongo:27017/todos_huge', {useNewUrlParser: true});
         mongoose.connection.once('open', function() {
             console.log('Connection to mongoDB has been established successfully');
         });
