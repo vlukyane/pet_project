@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
         - name: todos-backend
-          image: vlukyane/todos:backendv1.0.1
+          image: vlukyane/todos:backend_testv1.0.2
           ports:
             - containerPort: 3001
-      restartPolicy: Always
