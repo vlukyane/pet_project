@@ -2,11 +2,13 @@ import {ITodo} from '../common/types';
 import {UpdateTodoData} from '../components/TodoList/TodoList';
 import {allActions} from '../actions';
 
+// @ts-ignore
+const TODOS_URL = process.env.TODOS_BACKEND_SERVICE_HOST;
 const io = require('socket.io-client');
 
 export class SocketService {
     static init () {
-        return io.connect('http://localhost:3001', {
+        return io.connect(`${TODOS_URL}`, {
             path: '/api/socket.io'
         });
     }

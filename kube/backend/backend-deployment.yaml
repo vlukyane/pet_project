@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: todos-backend-deployment
+  name: todos-backend
 spec:
   replicas: 1
   selector:

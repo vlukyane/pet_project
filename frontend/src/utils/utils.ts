@@ -1,6 +1,7 @@
 import {CookieService} from "../auth/service/CookieService";
 
-const serverUrl = 'http://localhost:3001/api/';
+const TODOS_URL = process.env.TODOS_BACKEND_SERVICE_HOST;
+const serverUrl = `${TODOS_URL}:3001/api/`;
 
 const checkCookie = async () => {
     const cookieRaw = await CookieService.get('sign_in');
@@ -14,6 +15,8 @@ const checkCookie = async () => {
 };
 
 export const sendRequest = async(url: string, method: string, headers?: any, body?: any) => {
+    console.log('TODOS URLS ::::', TODOS_URL);
+    console.log('TODOS URLS ::::', process.env);
     const authHeader = await checkCookie();
     if (authHeader) {
         headers = {

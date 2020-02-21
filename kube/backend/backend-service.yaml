@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: todos-backend
 spec:
-  type: NodePort
   ports:
   - name: "3001"
     port: 3001
