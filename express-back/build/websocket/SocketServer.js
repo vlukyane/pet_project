@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const socket = require('socket.io');
 class SocketServer {
     static init(server) {
-        const io = socket(server);
+        const io = socket(server, {
+            path: '/api/socket.io',
+        });
         const clients = {};
         io.on('connection', (socket) => {
             clients[socket.id] = socket;

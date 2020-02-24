@@ -2,19 +2,6 @@ import {wssClients} from '../index';
 import {ITodo} from '../todos/repo/types';
 export class SocketService {
     static addTodo(todo) {
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log(Object.keys(wssClients));
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
-        console.log('__________________________')
         Object.keys(wssClients).forEach( (socketId: string) => {
             wssClients[socketId].emit('addTodo', todo );
         });

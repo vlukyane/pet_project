@@ -2,11 +2,14 @@ import {ITodo} from '../common/types';
 import {UpdateTodoData} from '../components/TodoList/TodoList';
 import {allActions} from '../actions';
 
+// @ts-ignore
 const io = require('socket.io-client');
 
 export class SocketService {
     static init () {
-        return io.connect('http://localhost:3001/');
+        return io.connect(`http://192.168.64.6:32001`, {
+            path: '/api/socket.io'
+        });
     }
 
     static deleteTodoById(id: string, dispatcher: any) {

@@ -31,8 +31,8 @@ export class App {
         const authService = new AuthService(repo);
         const authController = new AuthController(authService, app);
 
-        app.use('/todos', todoController.getRoutes());
-        app.use('', authController.getRoutes());
+        app.use('/api/todos', todoController.getRoutes());
+        app.use('/api/', authController.getRoutes());
 
         return app.listen(port, function() {
             console.log('Runnning on ' + port);

@@ -21,12 +21,17 @@ export class TodoController implements Controller {
     }
 
     private initRoutes() {
-        this.router.get('/', jwtMiddleware({secret: 'secret'}), this.getAllTodos);
-        this.router.get('/:token', jwtMiddleware({secret: 'secret'}), this.getNextTodos);
-        this.router.post('/add', jwtMiddleware({secret: 'secret'}), this.addNewTodo);
-        this.router.delete('/delete/:id', jwtMiddleware({secret: 'secret'}), this.deleteTodoById);
-        this.router.put('/update/:id', jwtMiddleware({secret: 'secret'}), this.updateTodoById);
-        this.router.get('/info/:id', jwtMiddleware({secret: 'secret'}), this.getTodoById);
+        this.router.get('/', this.getAllTodos);
+        this.router.get('/:token', this.getNextTodos);
+        this.router.post('/add', this.addNewTodo);
+        this.router.delete('/delete/:id', this.deleteTodoById);
+        this.router.put('/update/:id', this.updateTodoById);
+        // this.router.get('/info/:id', jwtMiddleware({secret: 'secret'}), this.getTodoById);this.router.get('/', jwtMiddleware({secret: 'secret'}), this.getAllTodos);
+        // this.router.get('/:token', jwtMiddleware({secret: 'secret'}), this.getNextTodos);
+        // this.router.post('/add', jwtMiddleware({secret: 'secret'}), this.addNewTodo);
+        // this.router.delete('/delete/:id', jwtMiddleware({secret: 'secret'}), this.deleteTodoById);
+        // this.router.put('/update/:id', jwtMiddleware({secret: 'secret'}), this.updateTodoById);
+        // this.router.get('/info/:id', jwtMiddleware({secret: 'secret'}), this.getTodoById);
     }
 
     getAllTodos = async (req, res): Promise<ITodo[]> => {

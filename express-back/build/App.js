@@ -25,8 +25,8 @@ class App {
         const todoController = new TodoController_1.TodoController(todoService, app);
         const authService = new AuthService_1.AuthService(repo);
         const authController = new AuthController_1.AuthController(authService, app);
-        app.use('/todos', todoController.getRoutes());
-        app.use('', authController.getRoutes());
+        app.use('/api/todos', todoController.getRoutes());
+        app.use('/api/', authController.getRoutes());
         return app.listen(port, function () {
             console.log('Runnning on ' + port);
         });

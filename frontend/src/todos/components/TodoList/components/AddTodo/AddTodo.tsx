@@ -4,7 +4,6 @@ import {Add} from '@material-ui/icons';
 
 interface IProps {
     id?: string,
-    content?: string,
     addTodo: (term: string) => void,
 }
 
@@ -22,8 +21,8 @@ const useStyles = makeStyles({
     }
 });
 
-export const AddTodo: React.FC<IProps> = ({ content, addTodo }) =>{
-    const [term, setTerm] = useState<string>(content || '');
+export const AddTodo: React.FC<IProps> = ({ addTodo }) =>{
+    const [term, setTerm] = useState<string>('');
     const classes = useStyles();
 
     const onInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {

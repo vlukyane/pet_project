@@ -1,0 +1,11 @@
+version: '3'
+services:
+  frontend:
+    container_name: todos-frontend
+    restart: always
+    build: ../frontend
+    ports:
+      - '3000:3000'
+networks:
+  project_network:
+    external: true

@@ -4,7 +4,9 @@ const socket = require('socket.io');
 export class SocketServer {
 
     static init(server: Express) {
-        const io = socket(server);
+        const io = socket(server, {
+            path: '/api/socket.io',
+        });
         const clients = {};
 
         io.on('connection', (socket) => {

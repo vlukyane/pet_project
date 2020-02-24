@@ -1,6 +1,6 @@
 import {CookieService} from "../auth/service/CookieService";
 
-const serverUrl = 'http://localhost:3001/';
+const serverUrl = `http://192.168.64.6:32001/api/`;
 
 const checkCookie = async () => {
     const cookieRaw = await CookieService.get('sign_in');

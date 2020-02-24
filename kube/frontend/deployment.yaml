@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: todos-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todos-frontend
+  template:
+    metadata:
+      labels:
+        app: todos-frontend
+    spec:
+      containers:
+        - name: todos-frontend
+          image: vlukyane/todos:frontend_testv1.0.3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: TODOS_BACKEND
+              value: $TODOS_BACKEND_SERVICE_HOST
