@@ -1,6 +1,7 @@
 import {CookieService} from "../auth/service/CookieService";
 
-const serverUrl = `http://192.168.64.6:32001/api/`;
+declare const window: any;
+const serverUrl = `${window.TODOS_BACKEND_SERVICE_ADDRESS}api/`;
 
 const checkCookie = async () => {
     const cookieRaw = await CookieService.get('sign_in');
@@ -21,6 +22,7 @@ export const sendRequest = async(url: string, method: string, headers?: any, bod
             ...headers
         }
     }
+
     return await fetch(`${serverUrl}${url}`, {
         method,
         headers,

@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: todos-frontend
-          image: vlukyane/todos:frontend_testv1.0.3
+          image: vlukyane/todos:front-test
+#          image: vlukyane/todos:frontend_testv1.0.3
           imagePullPolicy: Always
           ports:
             - containerPort: 80
